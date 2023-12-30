@@ -72,24 +72,28 @@ let swiperTestimonial = new Swiper(".testimonial__container", {
 
 /*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
 const sections = document.querySelectorAll('section[id]')
-    
-const scrollActive = () =>{
-  	const scrollY = window.pageYOffset
 
-	sections.forEach(current =>{
-		const sectionHeight = current.offsetHeight,
-			  sectionTop = current.offsetTop - 58,
-			  sectionId = current.getAttribute('id'),
-			  sectionsClass = document.querySelector('.nav__menu a[href*=' + sectionId + ']')
+const scrollActive = () => {
+  const scrollY = window.pageYOffset;
 
-		if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
-			sectionsClass.classList.add('active-link')
-		}else{
-			sectionsClass.classList.remove('active-link')
-		}                                                    
-	})
-}
-window.addEventListener('scroll', scrollActive)
+  sections.forEach(current => {
+    const sectionHeight = current.offsetHeight,
+      sectionTop = current.offsetTop - 58,
+      sectionId = current.getAttribute('id'),
+      sectionsClass = document.querySelector('.nav__menu a[href*=' + sectionId + ']');
+
+    // Check if sectionsClass is not null before accessing classList
+    if (sectionsClass) {
+      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+        sectionsClass.classList.add('active-link');
+      } else {
+        sectionsClass.classList.remove('active-link');
+      }
+    }
+  });
+};
+
+window.addEventListener('scroll', scrollActive);
 
 /*=============== LIGHT DARK THEME ===============*/ 
 const themeButton = document.getElementById('theme-button')
